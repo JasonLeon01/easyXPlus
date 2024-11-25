@@ -1,0 +1,8 @@
+.vs
+x64
+x86
+easyXPlus.sln
+easyXPlus.vcxproj
+easyXPlus.vcxproj.filters
+easyXPlus.vcxproj.user
+main.cpp
