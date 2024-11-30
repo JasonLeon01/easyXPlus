@@ -4,7 +4,7 @@
 #include <easyXPlus/Base/eRect.h>
 #include <easyXPlus/Base/eVector.h>
 #include <easyXPlus/Base/eRGBA.h>
-#include <easyXPlus/Render/eRenderUtils.h>
+#include <easyXPlus/Render/eImage.h>
 
 namespace easyXPlus {
 	enum Align {
@@ -16,12 +16,12 @@ namespace easyXPlus {
 	class eBitmap {
 	public:
 		eBitmap(int width, int height);
-		eBitmap(IMAGE* src);
+		eBitmap(eImage* src);
 		~eBitmap();
 
 		int GetWidth();
 		int GetHeight();
-		IMAGE* GetImage();
+		eImage* GetImage();
 		void Blit(int x, int y, eBitmap* srcBitmap, eRect srcRect, int opacity = 0);
 		void FillRect(eRect rect, eRGBA color);
 		void GradientFillRect(eRect rect, eRGBA color1, eRGBA color2, bool isVertical = true);
@@ -32,8 +32,11 @@ namespace easyXPlus {
 		int TextHeight(eString text);
 		void Save(eString path);
 
+		static void FillRect(eImage* img, eRect rect, eRGBA color);
+		static void GradientFillRect(eImage* img, eRect rect, eRGBA color1, eRGBA color2, bool isVertical = true);
+
 	private:
-		IMAGE* bitmapContent;
+		eImage* bitmapContent;
 		eBitmap() = default;
 	};
 }

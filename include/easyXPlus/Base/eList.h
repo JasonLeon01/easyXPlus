@@ -166,6 +166,16 @@ namespace easyXPlus {
 			return result;
 		}
 
+		void Sort() {
+			QuickSort(0, _size - 1);
+		}
+
+		eList<T> SortedList() {
+			eList<T> sortedList(*this);
+			sortedList.Sort();
+			return sortedList;
+		}
+
 		class Iterator {
 		public:
 			Iterator(T* ptr) : _ptr(ptr) {}
@@ -232,6 +242,33 @@ namespace easyXPlus {
 			delete[] _data;
 			_data = newData;
 			_capacity = newCapacity;
+		}
+
+		void QuickSort(int low, int high) {
+			if (low < high) {
+				int pivotIndex = Partition(low, high);
+				QuickSort(low, pivotIndex - 1);
+				QuickSort(pivotIndex + 1, high);
+			}
+		}
+
+		int Partition(int low, int high) {
+			T pivot = _data[high];
+			int i = low - 1;
+			for (int j = low; j < high; j++) {
+				if (_data[j] <= pivot) {
+					i++;
+					Swap(i, j);
+				}
+			}
+			Swap(i + 1, high);
+			return i + 1;
+		}
+
+		void Swap(int i, int j) {
+			T temp = _data[i];
+			_data[i] = _data[j];
+			_data[j] = temp;
 		}
 	};
 }

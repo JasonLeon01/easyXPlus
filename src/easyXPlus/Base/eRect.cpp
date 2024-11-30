@@ -21,20 +21,4 @@ namespace easyXPlus {
 		width = other.width;
 		height = other.height;
 	}
-
-	int eRect::GetX() {
-		return x;
-	}
-
-	int eRect::GetY() {
-		return y;
-	}
-
-	int eRect::GetWidth() {
-		return width;
-	}
-
-	int eRect::GetHeight() {
-		return height;
-	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <easyXPlus/Base/ePair.h>
+#include <easyXPlus/Base/eList.h>
 
 namespace easyXPlus {
 	template <typename TKey, typename TValue>
@@ -9,6 +10,7 @@ namespace easyXPlus {
 		eNode* Next;
 
 		eNode() : Data(), Next(nullptr) {}
+		eNode(ePair <TKey, TValue> data) : Data(data), Next(nullptr) {}
 	};
 
 	template <typename TKey, typename TValue>
@@ -20,7 +22,7 @@ namespace easyXPlus {
 		}
 
 		void Add(TKey key, TValue value) {
-			eNode <TKey, TValue>* newNode = new eNode <TKey, TValue>(ePair <Tkey, TValue>(key, value));
+			eNode <TKey, TValue>* newNode = new eNode <TKey, TValue>(ePair <TKey, TValue>(key, value));
 
 			if (_head == nullptr) {
 				_head = newNode;
@@ -140,6 +142,16 @@ namespace easyXPlus {
 			--_count;
 		}
 
+		eList <TKey> GetKeys() {
+			eList <TKey> keys;
+			eNode <TKey, TValue>* current = _head;
+			while (current != nullptr) {
+				keys.Append(current->Data.Key);
+				current = current->Next;
+			}
+			return keys;
+		}
+
 		class Iterator {
 		private:
 			eNode<TKey, TValue>* Current;
@@ -163,10 +175,23 @@ namespace easyXPlus {
 				}
 				throw std::out_of_range("Iterator out of range");
 			}
+
+			operator bool() const {
+				return isValid();
+			}
+
+			ePair<TKey, TValue>& operator*() {
+				return current();
+			}
+
+			Iterator& operator++() {
+				next();
+				return *this;
+			}
 		};
 
 		Iterator begin() {
-			return Iterator(Head);
+			return Iterator(_head);
 		}
 
 		Iterator end() {
