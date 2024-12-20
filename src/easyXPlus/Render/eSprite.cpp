@@ -28,6 +28,12 @@ namespace easyXPlus {
 		origin = inOrigin;
 	}
 
+	eSprite::~eSprite() {
+		if (bitmap) {
+			delete bitmap;
+		}
+	}
+
 	eViewport* eSprite::GetViewport() {
 		return viewport;
 	}

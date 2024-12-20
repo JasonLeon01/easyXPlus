@@ -15,6 +15,7 @@ namespace easyXPlus {
 		eSprite(eViewport* inViewport = eViewport::DefaultViewport);
 		eSprite(eBitmap* inBitmap, eViewport* inViewport = eViewport::DefaultViewport);
 		eSprite(eBitmap* inBitmap, eVector3d inPosition, eViewport* inViewport = eViewport::DefaultViewport, float inRotation = 0.f, BYTE inOpacity = 255, eVector2d inOrigin = eVector2d(0, 0));
+		~eSprite();
 
 		const bool operator < (const eSprite& other) const {
 			return position.z < other.position.z;

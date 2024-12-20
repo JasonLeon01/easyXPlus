@@ -29,6 +29,9 @@ namespace easyXPlus {
 	}
 
 	void Graphics::Exit() {
+		if (frozenGraphic) {
+			delete frozenGraphic;
+		}
 		EndBatchDraw();
 		closegraph();
 	}
